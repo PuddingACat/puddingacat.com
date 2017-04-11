@@ -3,17 +3,18 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const AutoPrefixer = require('autoprefixer');
 
 const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',
   HOST: process.env.HOST || 'localhost',
   PORT: process.env.PORT || '8080',
-  PUBLIC_URL: '',
+  ASSET_PATH: process.env.ASSET_PATH || '/',
 };
 const PATHS = {
-  src: path.join(__dirname, 'src'),
-  public: path.join(__dirname, 'public'),
-  build: path.join(__dirname, 'dist'),
+  src: path.resolve(__dirname, 'src'),
+  public: path.resolve(__dirname, 'public'),
+  build: path.resolve(__dirname, 'dist'),
 };
 
 const devConfig = {
@@ -23,9 +24,6 @@ const devConfig = {
   output: {
     path: PATHS.build,
     filename: '[name].js',
-  },
-  resolve: {
-    extensions: ['.js', '.jsx', '.json'],
   },
   module: {
     rules: [{
@@ -64,6 +62,9 @@ const devConfig = {
       }],
     }],
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
+  },
   plugins: [
     new CleanWebpackPlugin([PATHS.build]),
     new HtmlWebpackPlugin({
@@ -72,12 +73,17 @@ const devConfig = {
       title: 'Pudding A Cat',
       appMountId: 'root',
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
     historyApiFallback: true,
+    hot: true,
     inline: true,
     host: env.HOST,
     port: env.PORT,
+    overlay: {
+      errors: true,
+    },
   },
   devtool: 'cheap-module-source-map',
 };
@@ -90,9 +96,7 @@ const prodConfig = {
   output: {
     path: PATHS.build,
     filename: '[name].[chunkhash].js',
-  },
-  resolve: {
-    extensions: ['.js', '.jsx', '.json'],
+    chunkFilename: '[chunkhash].js',
   },
   module: {
     rules: [{
@@ -107,23 +111,39 @@ const prodConfig = {
       test: /\.less$/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: ['css-loader', 'less-loader'/* , 'postcss-loader'*/],
+        use: ['css-loader', 'less-loader', {
+          loader: 'postcss-loader',
+          options: {
+            plugins: () => ([AutoPrefixer]),
+          },
+        }],
       }),
     }, {
       test: /\.(png|jpg|svg)$/,
-      use: 'url-loader',
+      use: {
+        loader: 'url-loader',
+        options: {
+          limit: 20000,
+          name: '[name].[chunkhash].[ext]',
+        },
+      },
     }, {
       test: /\.(eot|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-      use: [{
+      use: {
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]',
+          name: '[name].[chunkhash].[ext]',
         },
-      }],
+      },
     }],
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
+  },
   plugins: [
-    new CleanWebpackPlugin([PATHS.build]),
+    new CleanWebpackPlugin([PATHS.build], {
+      root: process.cwd(),
+    }),
     new HtmlWebpackPlugin({
       inject: false,
       template: require('html-webpack-template'),
@@ -135,6 +155,12 @@ const prodConfig = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],
+      minChunks: Infinity,
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
     }),
   ],
   devtool: 'cheap-module-source-map',
