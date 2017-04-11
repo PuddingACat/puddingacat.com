@@ -70,6 +70,7 @@ const devConfig = {
     new HtmlWebpackPlugin({
       inject: false,
       template: require('html-webpack-template'),
+      mobile: true,
       title: 'Pudding A Cat',
       appMountId: 'root',
     }),
@@ -124,7 +125,7 @@ const prodConfig = {
         loader: 'url-loader',
         options: {
           limit: 20000,
-          name: '[name].[chunkhash].[ext]',
+          name: 'imgs/[name].[ext]',
         },
       },
     }, {
@@ -132,7 +133,7 @@ const prodConfig = {
       use: {
         loader: 'file-loader',
         options: {
-          name: '[name].[chunkhash].[ext]',
+          name: '[name].[ext]',
         },
       },
     }],
@@ -147,6 +148,7 @@ const prodConfig = {
     new HtmlWebpackPlugin({
       inject: false,
       template: require('html-webpack-template'),
+      mobile: true,
       title: 'Pudding A Cat',
       appMountId: 'root',
     }),
