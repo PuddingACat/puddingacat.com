@@ -92,12 +92,13 @@ const devConfig = {
 const prodConfig = {
   entry: {
     root: PATHS.src,
-    vendor: ['react', 'react-dom'],
+    vendor: ['react', 'react-dom', 'material-ui'],
   },
   output: {
     path: PATHS.build,
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[chunkhash].js',
+    publicPath: '/',
+    filename: 'js/[name].[chunkhash].js',
+    chunkFilename: 'js/[chunkhash].js',
   },
   module: {
     rules: [{
@@ -125,7 +126,7 @@ const prodConfig = {
         loader: 'url-loader',
         options: {
           limit: 20000,
-          name: 'imgs/[name].[ext]',
+          name: 'img/[name].[ext]',
         },
       },
     }, {
@@ -133,7 +134,7 @@ const prodConfig = {
       use: {
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]',
+          name: 'font/[name].[ext]',
         },
       },
     }],
@@ -153,7 +154,7 @@ const prodConfig = {
       appMountId: 'root',
     }),
     new ExtractTextPlugin({
-      filename: '[name].[chunkhash].css',
+      filename: 'css/[name].[chunkhash].css',
     }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],

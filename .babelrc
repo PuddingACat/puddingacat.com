@@ -3,10 +3,7 @@
     ["env", {
       "modules": false
     }],
+    "stage-1",
     "react"
-  ],
-  "plugins": [
-    "transform-class-properties",
-    "syntax-dynamic-import"
   ]
 }
