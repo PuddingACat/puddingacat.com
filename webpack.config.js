@@ -142,7 +142,7 @@ const prodConfig = {
         loader: 'url-loader',
         options: {
           limit: 20000,
-          name: 'img/[name].[ext]',
+          name: 'image/[name].[hash].[ext]',
         },
       },
     }, {
