@@ -70,7 +70,6 @@ const devConfig = {
     new CleanWebpackPlugin([PATHS.build]),
     new FaviconsWebpackPlugin({
       logo: './src/assets/favicon.png',
-      perfix: 'favicons/',
       icons: {
         android: false,
         appleIcon: false,
@@ -151,7 +150,7 @@ const prodConfig = {
       use: {
         loader: 'file-loader',
         options: {
-          name: 'font/[name].[ext]',
+          name: 'font/[name].[hash].[ext]',
         },
       },
     }],
@@ -165,7 +164,6 @@ const prodConfig = {
     }),
     new FaviconsWebpackPlugin({
       logo: './src/assets/favicon.png',
-      perfix: 'favicons-[hash]/',
       icons: {
         android: false,
         appleIcon: false,
