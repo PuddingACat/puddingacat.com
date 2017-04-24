@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const AutoPrefixer = require('autoprefixer');
 
@@ -67,6 +68,22 @@ const devConfig = {
   },
   plugins: [
     new CleanWebpackPlugin([PATHS.build]),
+    new FaviconsWebpackPlugin({
+      logo: './src/assets/favicon.png',
+      perfix: 'favicons/',
+      icons: {
+        android: false,
+        appleIcon: false,
+        appleStartup: false,
+        coast: false,
+        favicons: true,
+        firefox: false,
+        opengraph: false,
+        twitter: false,
+        yandex: false,
+        windows: false,
+      },
+    }),
     new HtmlWebpackPlugin({
       inject: false,
       template: require('html-webpack-template'),
@@ -145,6 +162,22 @@ const prodConfig = {
   plugins: [
     new CleanWebpackPlugin([PATHS.build], {
       root: process.cwd(),
+    }),
+    new FaviconsWebpackPlugin({
+      logo: './src/assets/favicon.png',
+      perfix: 'favicons-[hash]/',
+      icons: {
+        android: false,
+        appleIcon: false,
+        appleStartup: false,
+        coast: false,
+        favicons: true,
+        firefox: false,
+        opengraph: false,
+        twitter: false,
+        yandex: false,
+        windows: false,
+      },
     }),
     new HtmlWebpackPlugin({
       inject: false,
