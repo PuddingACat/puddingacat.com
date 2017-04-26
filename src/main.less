@@ -2,30 +2,68 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 300;
+  font-display: fallback;
   src: url('./assets/font/Roboto-Light.woff2') format('woff2'),
        url('./assets/font/Roboto-Light.woff') format('woff'),
-       url('./assets/font/Roboto-Light.ttf') format('truetype'),
+       url('./assets/font/Roboto-Light.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
+  font-display: fallback;
   src: url('./assets/font/Roboto-Regular.woff2') format('woff2'),
        url('./assets/font/Roboto-Regular.woff') format('woff'),
-       url('./assets/font/Roboto-Regular.ttf') format('truetype'),
+       url('./assets/font/Roboto-Regular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
+  font-display: fallback;
   src: url('./assets/font/Roboto-Medium.woff2') format('woff2'),
        url('./assets/font/Roboto-Medium.woff') format('woff'),
-       url('./assets/font/Roboto-Medium.ttf') format('truetype'),
+       url('./assets/font/Roboto-Medium.ttf') format('truetype');
+}
+
+a, abbr, address, article, aside, audio, base, blockquote, body, button,
+canvas, caption, cite, code, col, colgroup,
+datalist, dd, details, dfn, div, dl, dt, embed, fieldset, figcaption, figure, footer, form,
+h1, h2, h3, h4, h5, h6, header, hr, html,
+img, input, ins, label, legend, li, link, main, map, mark, menu, menuitem, meter, nav,
+object, ol, optgroup, option, output, p, param, picture, pre, progress, q,
+section, select, span, sub, summary, table, tbody, td, textarea, tfoot, th, thead, time, title,
+ul, video {
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: none;
+}
+:focus {
+	outline: none;
+}
+ol, ul {
+	list-style: none;
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #fff;
+}
+
+.clear {
+  &::after {
+    content: '';
+    clear: both;
+    display: table;
+  }
 }

@@ -129,12 +129,18 @@ const prodConfig = {
       test: /\.less$/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: ['css-loader', 'less-loader', {
+        use: [{
+          loader: 'css-loader',
+          options: {
+            minimize: true,
+            importLoaders: 2,
+          },
+        }, {
           loader: 'postcss-loader',
           options: {
-            plugins: () => ([AutoPrefixer]),
+            plugins: () => [AutoPrefixer],
           },
-        }],
+        }, 'less-loader'],
       }),
     }, {
       test: /\.(png|jpg|svg)$/,
@@ -146,7 +152,7 @@ const prodConfig = {
         },
       },
     }, {
-      test: /\.(eot|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+      test: /\.(eot|ttf|woff|woff2)$/,
       use: {
         loader: 'file-loader',
         options: {
