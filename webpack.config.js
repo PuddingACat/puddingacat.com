@@ -51,16 +51,8 @@ const devConfig = {
         },
       }],
     }, {
-      test: /\.(png|jpg|svg)$/,
+      test: /\.(png|jpg|svg|eot|ttf|woff|woff2)$/,
       use: 'url-loader',
-    }, {
-      test: /\.(eot|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-      use: [{
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-        },
-      }],
     }],
   },
   resolve: {
@@ -108,13 +100,16 @@ const devConfig = {
 const prodConfig = {
   entry: {
     root: PATHS.src,
-    vendor: ['react', 'react-dom', 'material-ui'],
+    vendor: [
+      'react',
+      'react-dom',
+      'react-tap-event-plugin'],
   },
   output: {
     path: PATHS.build,
     publicPath: '/',
-    filename: 'js/[name].[chunkhash].js',
-    chunkFilename: 'js/[chunkhash].js',
+    filename: 'js/[name].[chunkhash:8].js',
+    chunkFilename: 'js/[chunkhash:8].js',
   },
   module: {
     rules: [{
@@ -148,7 +143,7 @@ const prodConfig = {
         loader: 'url-loader',
         options: {
           limit: 20000,
-          name: 'image/[name].[hash].[ext]',
+          name: 'image/[name].[hash:8].[ext]',
         },
       },
     }, {
@@ -156,7 +151,7 @@ const prodConfig = {
       use: {
         loader: 'file-loader',
         options: {
-          name: 'font/[name].[hash].[ext]',
+          name: 'font/[name].[hash:8].[ext]',
         },
       },
     }],
@@ -168,8 +163,13 @@ const prodConfig = {
     new CleanWebpackPlugin([PATHS.build], {
       root: process.cwd(),
     }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
+    new webpack.BannerPlugin(`Compiled on ${new Date().toDateString()} by Sean with ❤️`),
     new FaviconsWebpackPlugin({
       logo: './src/assets/favicon.png',
+      prefix: 'icons-[hash:8]/',
       icons: {
         android: false,
         appleIcon: false,
@@ -191,7 +191,7 @@ const prodConfig = {
       appMountId: 'root',
     }),
     new ExtractTextPlugin({
-      filename: 'css/[name].[chunkhash].css',
+      filename: 'css/[name].[chunkhash:8].css',
     }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],
