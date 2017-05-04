@@ -166,7 +166,12 @@ const prodConfig = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
-    new webpack.BannerPlugin(`Compiled on ${new Date().toDateString()} by Sean with ❤️`),
+    new webpack.BannerPlugin({
+      banner: `Compiled on ${new Date().toDateString()} by Sean with ❤️`,
+      raw: false,
+      entryOnly: false,
+      exclude: /vendor/,
+    }),
     new FaviconsWebpackPlugin({
       logo: './src/assets/favicon.png',
       prefix: 'icons-[hash:8]/',
