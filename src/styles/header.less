@@ -4,12 +4,18 @@
     margin-top: 7px;
   }
 
-  @media only screen and (min-width: 600px) {
-    .appbar-nav-buttons-container {
-      display: inherit;
+  @media only screen {
+    @media (min-width: 600px) {
+      .appbar-nav-buttons-container {
+        display: inherit;
+      }
+      .appbar-nav-icon-menu {
+        display: none !important;
+      }
     }
-    .appbar-nav-icon-menu {
-      display: none !important;
+
+    @media (min-width: 1600px) {
+      padding: 0 calc(~'(100vw - 1440px) / 2') !important;
     }
   }
 }

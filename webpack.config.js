@@ -83,6 +83,7 @@ const devConfig = {
       appMountId: 'root',
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
   ],
   devServer: {
     historyApiFallback: true,
