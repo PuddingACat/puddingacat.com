@@ -1,19 +1,21 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { browserHistory, Router, Route, IndexRoute } from 'react-router';
 
 import Header from './components/Header';
-import Home from './components/Home';
-import About from './components/About';
 
 class Root extends React.Component {
   render() {
     return (
-      <div>
-        <Header />
-
-        <Route exact path="/" component={Home} />
-        <Route path="/about" component={About} />
-      </div>
+      <Router history={browserHistory}>
+        <Route path="/" component={Header}>
+          <IndexRoute getComponent={(nextState, cb) => (
+            import('./components/Home').then(module => cb(null, module.default))
+          )} />
+          <Route path="about" getComponent={(nextState, cb) => (
+            import('./components/About').then(module => cb(null, module.default))
+          )} />
+        </Route>
+      </Router>
     );
   }
 }

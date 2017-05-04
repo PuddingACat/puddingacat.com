@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
@@ -74,12 +75,19 @@ class NavActions extends React.Component {
   }
 }
 
-const Header = props => (
-  <AppBar
-    className="page-header"
-    showMenuIconButton={false}
-    title="Pudding A Cat"
-    iconElementRight={<NavActions />} />
+const Header = ({ children }) => (
+  <div>
+    <AppBar
+      className="page-header"
+      showMenuIconButton={false}
+      title="Pudding A Cat"
+      iconElementRight={<NavActions />} />
+    { children }
+  </div>
 );
+
+Header.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 
 export default Header;
