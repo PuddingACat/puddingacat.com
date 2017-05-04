@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import IconMenu from 'material-ui/IconMenu';
@@ -9,8 +11,14 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 const navButtons = (
   <div>
     <nav className="appbar-nav-buttons-container">
-      <FlatButton label="HOME" labelStyle={{ color: '#fff' }} href="#" />
-      <FlatButton label="ABOUT" labelStyle={{ color: '#fff' }} href="#" />
+      <FlatButton
+        label="HOME"
+        labelStyle={{ color: '#fff' }}
+        containerElement={<Link to="/" />} />
+      <FlatButton
+        label="ABOUT"
+        labelStyle={{ color: '#fff' }}
+        containerElement={<Link to="/about" />} />
     </nav>
     <IconMenu
       className="appbar-nav-icon-menu"

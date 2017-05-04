@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -10,9 +11,11 @@ import './main.less';
 injectTapEventPlugin();
 
 const App = () => (
-  <MuiThemeProvider>
-    <Root />
-  </MuiThemeProvider>
+  <Router>
+    <MuiThemeProvider>
+      <Root />
+    </MuiThemeProvider>
+  </Router>
 );
 
 ReactDOM.render(

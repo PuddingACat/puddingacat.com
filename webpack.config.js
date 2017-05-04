@@ -104,6 +104,7 @@ const prodConfig = {
     vendor: [
       'react',
       'react-dom',
+      'react-router-dom',
       'react-tap-event-plugin'],
   },
   output: {
