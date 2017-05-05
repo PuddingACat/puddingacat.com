@@ -82,6 +82,9 @@ const devConfig = {
       title: 'Pudding A Cat',
       appMountId: 'root',
     }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
   ],
@@ -167,6 +170,9 @@ const prodConfig = {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
     }),
     new webpack.BannerPlugin({
       banner: `Compiled on ${new Date().toDateString()} by Sean with ❤️`,
