@@ -6,7 +6,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 
 class NavActions extends React.Component {
   constructor(props) {
@@ -45,7 +45,7 @@ class NavActions extends React.Component {
         <IconButton
           className="appbar-nav-drawer-button"
           onTouchTap={this.openNavDrawer}>
-          <MoreVertIcon color="#fff" />
+          <MenuIcon color="#fff" />
         </IconButton>
         <Drawer
           className="appbar-nav-drawer"
@@ -55,7 +55,9 @@ class NavActions extends React.Component {
           openSecondary={true}
           open={this.state.drawerOpen}
           onRequestChange={drawerOpen => this.setState({ drawerOpen })} >
-          <AppBar showMenuIconButton={false} />
+          <AppBar
+            showMenuIconButton={false}
+            title="Pudding A Cat" />
           <MenuItem
             className="appbar-nav-drawer-item"
             onTouchTap={this.closeNavDrawer}
