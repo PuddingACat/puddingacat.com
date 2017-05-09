@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import PuddingIcon from '../assets/favicon.png';
+import PuddingIcon from '../assets/image/website-icon.png';
 import GitHubIcon from '../assets/image/GitHub-Mark-Light-64px.png';
 
 const Footer = ({ location }) => {
