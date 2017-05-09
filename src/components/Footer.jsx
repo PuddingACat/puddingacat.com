@@ -1,16 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import GitHubMark from '../assets/image/GitHub-Mark-Light-64px.png';
+import PuddingIcon from '../assets/favicon.png';
+import GitHubIcon from '../assets/image/GitHub-Mark-Light-64px.png';
 
-const Footer = props => (
-  <footer className="page-footer">
-    <p className="footer-text">Hand crafted with love by SEAN & LILLIAN</p>
-    <a
-      href="//github.com/Puuuudding/puddingacat.com"
-      target="_blank">
-      <img className="footer-github-icon" src={GitHubMark} />
-    </a>
-  </footer>
-);
+const Footer = ({ location }) => {
+  const showGitHub = location.pathname === '/about';
+  return (
+    <footer className="page-footer">
+      <p className="footer-text">Hand crafted with love by SEAN & LILLIAN</p>
+      <img className="footer-icon footer-pudding-icon" src={PuddingIcon} />
+      {showGitHub &&
+        <a
+          href="//github.com/Puuuudding/puddingacat.com"
+          target="_blank">
+          <img className="footer-icon footer-github-icon" src={GitHubIcon} />
+      </a>}
+    </footer>
+  );
+};
+
+Footer.propTypes = {
+  location: PropTypes.object,
+};
 
 export default Footer;

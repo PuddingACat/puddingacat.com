@@ -21,7 +21,7 @@ class Root extends React.Component {
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
 
-        <Footer />
+        <Route component={Footer} />
       </div>
     );
   }
