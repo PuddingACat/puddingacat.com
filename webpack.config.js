@@ -25,6 +25,7 @@ const devConfig = {
   output: {
     path: PATHS.build,
     filename: '[name].js',
+    chunkFilename: '[chunkhash:8].js',
   },
   module: {
     rules: [{
@@ -175,7 +176,7 @@ const prodConfig = {
       $: 'jquery',
     }),
     new webpack.BannerPlugin({
-      banner: `Compiled on ${new Date().toDateString()} by Sean with ❤️`,
+      banner: `Compiled with ❤️ on ${new Date().toDateString()} by Sean`,
       raw: false,
       entryOnly: false,
       exclude: /vendor/,
