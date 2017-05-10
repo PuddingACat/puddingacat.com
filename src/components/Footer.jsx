@@ -15,7 +15,8 @@ const Footer = ({ location }) => {
           href="//github.com/Puuuudding/puddingacat.com"
           target="_blank">
           <img className="footer-icon footer-github-icon" src={GitHubIcon} />
-      </a>}
+        </a>
+      }
     </footer>
   );
 };

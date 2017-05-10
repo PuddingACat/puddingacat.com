@@ -1,8 +1,29 @@
 .home-page {
+  @keyframes arrowdown {
+    from {
+      opacity: .2;
+    }
+    to {
+      transform: translate(-50%, 15px);
+      opacity: 1;
+    }
+  }
   .home-title-img {
+    position: relative;
     height: calc(~'100vh - 64px');
     background-image: url(../assets/image/pudding-home-title.jpg);
     background-position: center;
     background-size: cover;
+    .home-title-more-icon {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation-duration: 1500ms;
+      animation-name: arrowdown;
+      animation-direction: alternate;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in;
+    }
   }
 }
